@@ -32,7 +32,7 @@ export default class CreateProfile extends Component {
               <Text style = {{marginTop: 12 }}>ชื่อ : </Text>
               <TextInput style = {styles.input}
                 underlineColorAndroid = "transparent"
-                placeholder = "กรุณากรอกชื่อ"
+                placeholder = "กรุณากรอกชื่อเดียวกันกับในเกมส์"
                 placeholderTextColor = "#9a73ef"
                 onChangeText = {(text)=>this.setState({ name: text })}/> 
             </View>

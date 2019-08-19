@@ -10,7 +10,7 @@ class SelectCharacter extends Component {
      super(props)
      this.state = {sex : true , count : 0,
       class : [{'className' : 'Sword','M' : require('./img/swordMan.jpg') , 'W' : require('./img/swordWoman.jpg')},
-      {'className' : 'Magic','M' : require('./img/magicMan.jpg') , 'W' : require('./img/magicWoman.jpg')},
+      {'className' : 'Wizard','M' : require('./img/magicMan.jpg') , 'W' : require('./img/magicWoman.jpg')},
       ]
     }
    }
