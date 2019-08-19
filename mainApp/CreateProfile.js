@@ -1,14 +1,29 @@
 
 import React, { Component } from 'react';
-
+import {StackNavigator} from 'react-navigation';
+import ButtonNext from './component/ButtonNext'
 //import { TextInput } from 'react-native-paper';
 import DatePicker from 'react-native-datepicker';
-import { View, Text, Image ,StyleSheet,Button, TextInput,Picker} from 'react-native'
+import { View, Text, Image ,StyleSheet,Button, TextInput,Picker,TouchableHighlight ,Alert} from 'react-native'
 
-export default class PickerExample extends Component {
-   state = {name: '', iday : 9,
-      date:"15-05-2018"}
+export default class CreateProfile extends Component {
+   constructor(props){
+     super(props)
+     this.state = {name: '', iday : 9,
+     date:"15-05-2018",sex : ''}
+   }
+   onClickListener = () => {
+    Alert.alert("Login", "Success!!! ",[
+      {
+        text: 'Ok',
+        onPress: () =>
+          this.props.navigation.navigate('Login'),
+      },
+    ],
+    { cancelable: false });
+  }
    render() {
+    //const {navigate} = this.props.navigation;
       return (
          <View style={styles.container}>
             <Text style = {styles.editText}>สร้างโปรไฟล์</Text>
@@ -18,7 +33,7 @@ export default class PickerExample extends Component {
               <Text style = {{marginTop: 12 }}>ชื่อ : </Text>
               <TextInput style = {styles.input}
                 underlineColorAndroid = "transparent"
-                placeholder = "name"
+                placeholder = "กรุณากรอกชื่อ"
                 placeholderTextColor = "#9a73ef"
                 onChangeText = {(text)=>this.setState({ name: text })}/> 
             </View>
@@ -55,15 +70,11 @@ export default class PickerExample extends Component {
                 <Picker.Item label="หญิง" value="W" />
               </Picker>
             </View>
-            
-            <View style={{ margin : 20,flexDirection : 'row',alignSelf : 'flex-end'}}><Button
-              onPress={this.onPressLearnMore}
-              title="Next >"
-              color="#841584"
-            /></View>
-            
+            <TouchableHighlight style={[styles.buttonContainer, styles.subButton]} onPress={this.onClickListener} underlayColor = 'white'>
+              <Text style={styles.loginText}>Submit</Text>
+            </TouchableHighlight> 
+            {/* <ButtonNext customClick={() => this.props.navigation.navigate('SelectCharacter')} ></ButtonNext> */}
          </View>
-
       )
    }
 }
@@ -75,7 +86,8 @@ const styles = StyleSheet.create({
  },
  container: {
     paddingTop: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    // backgroundColor: '#DCDCDC'
   },
   input: {
     marginEnd: 10,
@@ -84,6 +96,18 @@ const styles = StyleSheet.create({
     width: 260,
     // borderColor: '#7a42f4',
     // borderWidth: 1
+  },
+  buttonContainer: {
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+  },
+  subButton: {
+    backgroundColor: "#00b5ec",
   },
   
 });
