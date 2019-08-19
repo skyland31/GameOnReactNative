@@ -105,6 +105,9 @@ const SeNavigator = createStackNavigator({
   },
   Detail: {
     screen: DetailCharacter,
+    navigationOptions : {
+      header : null
+    }
    },
 })
 export default createAppContainer(SeNavigator);

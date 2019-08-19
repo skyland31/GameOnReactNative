@@ -15,7 +15,7 @@ export default class DetailCharacter extends Component {
       <View style={styles.character}>
         <Text style={styles.titleText} >Character</Text>
         <View style={styles.container}>          
-          <Image style={styles.inputIcon} source={require('./img/swordMan.jpg')} />
+          <Image style={styles.inputIcon} resizeMode = 'center' source={require('./img/swordMan.jpg')} />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.inputs}>detail</Text>   

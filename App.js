@@ -43,7 +43,7 @@ const Main = createStackNavigator({
   CreateProfile: {
     screen: CreateProfile,
     navigationOptions: {
-      title: 'CreateProfile',
+      title: 'Detail',
       headerStyle: { backgroundColor: '#f05555' },
       headerTintColor: '#ffffff',
       
