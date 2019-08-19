@@ -14,22 +14,32 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
    
    render() {
       return (
-         <View style ={{justifyContent :'space-around'}}>
-            <StatusBar backgroundColor="green" barStyle="light-content" />
-            <View style = {style.rowEnd}>
-               <View style = {style.colCen}>
-                  <Text>UserName_1 Level : 0 </Text>
-                  <View style = {style.rowEnd}>
-                     <Image source={require('./img/cost.png')} style={{height: 20, width: 20 }}/>
-                     <Text> 10000 $</Text>
-                  </View>
-               </View>
-               <Image source={require('./img/User.png')} style={{height: 75, width: 75 , margin :10}}/>
-            </View> 
+         <View style={styles.container}>
+            <Text style = {styles.editText}>Profile</Text>
+            <Image source={require('./img/User.png')} style={{height: 100, width: 100 ,margin: 20 ,alignItems: 'center'}}/>
+            <Text>ชื่อ : {this.state.name}</Text>
+            <Text>Level : </Text>
+            <Text>Cost : </Text>
+            <Text>เพศ : ... </Text>
+            <Text>วัน-เดือน-ปีเกิด : </Text>
          </View>
       )
    }
 }
+const styles = StyleSheet.create({
+  editText: {
+    fontSize: 30,
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color : '#CC0033'
+ },
+ container: {
+    paddingTop: 20,
+    alignItems: 'center',
+    // backgroundColor: '#DCDCDC'
+  },
+  
+});
 const style = StyleSheet.create({
    colCen : {
       flexDirection : 'column',
@@ -42,7 +52,7 @@ const style = StyleSheet.create({
    }
 })
 const TabNavigator = createBottomTabNavigator({
-   Home: { 
+   Profile: { 
       screen: HomeStart 
    },
    Character : { 

@@ -13,7 +13,7 @@ const MainNavigator = createStackNavigator({
   Login: {
     screen: login,
     navigationOptions: {
-      title: 'Home',
+      title: 'Character Storie',
       headerStyle: { backgroundColor: '#f05555' },
       headerTintColor: '#ffffff',
      },
@@ -24,18 +24,19 @@ const MainNavigator = createStackNavigator({
       title: 'Home',
       headerStyle: { backgroundColor: '#f05555' },
       headerTintColor: '#ffffff',
+      header: null,
      },
    },
-},{headerMode : 'none'})
+},)
 
 
 const Main = createStackNavigator({
   GoHome: {
     screen: MainNavigator,
     navigationOptions: {
-      // title: 'Welcome',
+      // title: 'Character Storie',
       // headerStyle: { backgroundColor: '#f05555' },
-      // //headerTintColor: '#ffffff',
+      // headerTintColor: '#ffffff',
       header: null,
      },
   },

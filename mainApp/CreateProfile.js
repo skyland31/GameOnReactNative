@@ -23,7 +23,6 @@ export default class CreateProfile extends Component {
     { cancelable: false });
   }
    render() {
-    //const {navigate} = this.props.navigation;
       return (
          <View style={styles.container}>
             <Text style = {styles.editText}>สร้างโปรไฟล์</Text>
