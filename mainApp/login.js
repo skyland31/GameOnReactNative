@@ -1,27 +1,55 @@
 import React, { Component } from 'react';
 
 import {  StyleSheet,  Text,  View,  TextInput,  ViewPagerAndroid,  TouchableHighlight,  Image,  Alert} from 'react-native';
-import HomeStart from './HomeStart'
-
+import Buttons from './component/Buttons'
+import { openDatabase } from 'react-native-sqlite-storage';
+var db = openDatabase({ name: 'UserDatabase.db', createFromLocation : 1});
 export default class LoginView extends Component {
 
   constructor(props) {
     super(props);
-    state = {
-      email   : '',
-    }
+    // state = {
+    //   email   : '',
+    // }
+    this.state = {
+      input_user: '',
+      input_password : '',
+    };
   }
   
   onClickListener = () => {
-    Alert.alert("Login", "Success!!! ",[
-      {
-        text: 'Ok',
-        onPress: () =>
-          
-          this.props.navigation.navigate('HomeStart'),
-      },
-    ],
-    { cancelable: false });
+    // const {input_user} =this.state;
+    // const {input_password} =this.state;
+    console.log(this.state.input_user);
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM game_user where password = ? and name = ?',
+        [this.state.input_password , this.state.input_user],
+        (tx, results) => {
+          var len = results.rows.length;
+          console.log('len',len);
+          if (len > 0) {
+            Alert.alert("Login", "Success!!! " + this.state.input_user,[
+              {
+                text: 'Ok',
+                onPress: () =>
+                  this.props.navigation.navigate('HomeStart',{userCorrect : this.state.input_user})
+              },
+            ],
+            { cancelable: false });
+            this.setState({
+              input_password : '',
+             });
+          }else{
+            alert('Username or Password UnCorrect');
+            this.setState({
+             input_user: '',
+             input_password : '',
+            });
+          }
+        }
+      );
+    });
   }
 
   render() {
@@ -31,14 +59,26 @@ export default class LoginView extends Component {
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={require('./img/seller_login.png')}/>
           <TextInput style={styles.inputs}
-              placeholder="๊Name"
-              keyboardType="email-address"
+              value = {this.state.input_user}
+              placeholder="๊Username"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(input_user) => this.setState({input_user})}/>
         </View>
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onClickListener}>
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={require('./img/seller_login.png')}/>
+          <TextInput style={styles.inputs}
+              value = {this.state.input_password}
+              placeholder="๊Pasword"
+              underlineColorAndroid='transparent'
+              onChangeText={(input_password) => this.setState({input_password})}
+              secureTextEntry={true}
+              />
+        </View>
+        {/* <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onClickListener}>
           <Text style={styles.loginText}>Login</Text>
-        </TouchableHighlight>                
+        </TouchableHighlight>                 */}
+        <Buttons title = "Login" link = {this.onClickListener}></Buttons>
+
         <TouchableHighlight style={[styles.buttonContainer]} onPress={() => this.props.navigation.navigate('CreateProfile')}>
         <Text style={styles.registerText}>Register</Text>
         </TouchableHighlight>

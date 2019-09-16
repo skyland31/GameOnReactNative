@@ -1,10 +1,8 @@
 
 import React, { Component } from 'react';
-import {StackNavigator} from 'react-navigation';
-import ButtonNext from './component/ButtonNext'
 //import { TextInput } from 'react-native-paper';
 import DatePicker from 'react-native-datepicker';
-import { View, Text, Image ,StyleSheet,Button, TextInput,Picker,TouchableHighlight ,Alert} from 'react-native'
+import { ScrollView,View, Text, Image ,StyleSheet,Button, TextInput,Picker,TouchableHighlight ,Alert} from 'react-native'
 
 export default class CreateProfile extends Component {
    constructor(props){
@@ -13,28 +11,53 @@ export default class CreateProfile extends Component {
      date:"15-05-2018",sex : ''}
    }
    onClickListener = () => {
-    Alert.alert("Login", "Success!!! ",[
-      {
-        text: 'Ok',
-        onPress: () =>
-          this.props.navigation.navigate('Login'),
-      },
-    ],
-    { cancelable: false });
+    if(this.state.name != ''){
+      Alert.alert("Submit", "Success!!! ",[
+        {
+          text: 'Ok',
+          onPress: () =>
+            this.props.navigation.navigate('Login'),
+        },
+      ],
+      { cancelable: false });
+    }
+    else {
+      Alert.alert("Please", " input name ")
+    }
   }
+  
    render() {
       return (
-         <View style={styles.container}>
+         <ScrollView >
+           <View style={styles.container}>
             <Text style = {styles.editText}>สร้างโปรไฟล์</Text>
             <Image source={require('./img/User.png')} style={{height: 100, width: 100 ,margin: 20 ,alignItems: 'center'}}/>
             <Text>{this.state.name}</Text>
             <View style ={{flexDirection : 'row',margin: 10}}>
-              <Text style = {{marginTop: 12 }}>ชื่อ : </Text>
+              <Text style = {{marginTop: 12 }}>Username : </Text>
               <TextInput style = {styles.input}
                 underlineColorAndroid = "transparent"
-                placeholder = "กรุณากรอกชื่อเดียวกันกับในเกมส์"
+                placeholder = "Username"
                 placeholderTextColor = "#9a73ef"
                 onChangeText = {(text)=>this.setState({ name: text })}/> 
+            </View>
+            <View style ={{flexDirection : 'row',margin: 10}}>
+              <Text style = {{marginTop: 12 }}>Password : </Text>
+              <TextInput style = {styles.input}
+                underlineColorAndroid = "transparent"
+                placeholder = "Password"
+                placeholderTextColor = "#9a73ef"
+                onChangeText = {(text)=>this.setState({ name: text })}
+                secureTextEntry={true}/> 
+            </View>
+            <View style ={{flexDirection : 'row',margin: 10}}>
+              <Text style = {{marginTop: 12 }}>Password : </Text>
+              <TextInput style = {styles.input}
+                underlineColorAndroid = "transparent"
+                placeholder = "Password อีกครั้ง"
+                placeholderTextColor = "#9a73ef"
+                onChangeText = {(text)=>this.setState({ name: text })}
+                secureTextEntry={true}/> 
             </View>
             <Text>วัน-เดือน-ปี เกิด</Text>
             <DatePicker
@@ -73,7 +96,8 @@ export default class CreateProfile extends Component {
               <Text style={styles.loginText}>Submit</Text>
             </TouchableHighlight> 
             {/* <ButtonNext customClick={() => this.props.navigation.navigate('SelectCharacter')} ></ButtonNext> */}
-         </View>
+            </View>
+         </ScrollView>
       )
    }
 }

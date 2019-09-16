@@ -4,6 +4,7 @@ import ButtonNext from './component/ButtonNext'
 import { ScrollView,View, Text, Image ,StyleSheet,TouchableHighlight} from 'react-native'
 import DetailCharacter from './DetailCharacter';
 import {createStackNavigator,createAppContainer,createBottomTabNavigator} from 'react-navigation';
+import Skill from './Skill';
 class SelectCharacter extends Component {
   
    constructor(props){
@@ -11,6 +12,7 @@ class SelectCharacter extends Component {
      this.state = {sex : true , count : 0,
       class : [{'className' : 'Sword','M' : require('./img/swordMan.jpg') , 'W' : require('./img/swordWoman.jpg')},
       {'className' : 'Wizard','M' : require('./img/magicMan.jpg') , 'W' : require('./img/magicWoman.jpg')},
+      {'className' : 'Assasin','M' : require('./img/assasin.png') , 'W' : require('./img/assasinW.png')},
       ]
     }
    }
@@ -21,7 +23,7 @@ class SelectCharacter extends Component {
    }
    setrightcount = () => {
      this.setState(oldstate => { 
-      if(this.state.count == 1){
+      if(this.state.count == 2){
         return {count : 0};
       }
       else{
@@ -32,7 +34,7 @@ class SelectCharacter extends Component {
    setleftcount = () => {
     this.setState(oldstate => { 
      if(this.state.count == 0){
-       return {count : 1};
+       return {count : 2};
      }
      else{
        return {count : oldstate.count -1}
@@ -63,9 +65,9 @@ class SelectCharacter extends Component {
               ))
             }
             <TouchableHighlight onPress = {this.changSex} underlayColor = 'white' style ={{backgroundColor : "yellow"}}>
-              <Text >เปลี่ยนเพศตัวละคร : {this.state.sex ? 'ชาย' : 'หญิง'}</Text>
+              <Text>เปลี่ยนเพศตัวละคร : {this.state.sex ? 'ชาย' : 'หญิง'}</Text>
             </TouchableHighlight>
-            <ButtonNext customClick={() => this.props.navigation.navigate('Detail')} ></ButtonNext>
+            <ButtonNext customClick={() => this.props.navigation.navigate('Detail')}></ButtonNext>
          </View>
          </ScrollView>
       )
@@ -110,4 +112,14 @@ const SeNavigator = createStackNavigator({
     }
    },
 })
-export default createAppContainer(SeNavigator);
+// export default createAppContainer(SeNavigator);
+const TabNavigator = createBottomTabNavigator({
+  Character : { 
+     screen: SeNavigator 
+  },
+  Skill : { 
+     screen: Skill 
+  },
+
+});
+export default createAppContainer(TabNavigator);
